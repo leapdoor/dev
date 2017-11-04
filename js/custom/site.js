@@ -6,26 +6,6 @@ var isScrollTop = false;
 var $titleOffset = ($('#searchWrapper').offset().top),
     breakpoint = calSize();
 
-function calSize() {
-    var val = 0;
-    var deviceWidth = $(window)[0].innerWidth;
-    if (deviceWidth > 425) {
-        val = $titleOffset + 90;
-    } else {
-        val = $titleOffset - 80;
-    }
-    return val;
-}
-
-function scrollToDown() {
-    var _titleTopSpace = $titleOffset + 90;
-    if (!$(window).scrollTop() > 0) {
-        $("html, body").animate({scrollTop: _titleTopSpace}, 500);
-    } else {
-        $("html, body").scrollTop(_titleTopSpace);
-    }
-
-}
 
 var SelectedCategory = (function () {
     var _category = {
@@ -78,23 +58,6 @@ var SelectedCategory = (function () {
 
 })();
 
-// function hideTitle($isTitleHide) {
-//     var $title = $('.main-title');
-//     var searchSection = $('.search-section');
-//
-//     if ($isTitleHide) {
-//         $title.addClass('hide-title');
-//         $('.full-height').css('height', '');
-//         searchSection.removeClass('full-height').addClass('is-search-fixed');
-//         var $searchSectionHeight = searchSection.height();
-//         $('#ajaxLoadAdvertisements').animate({'marginTop': '226px'}, 0);
-//         $(window).scrollTop(0);
-//     } else {
-//         $title.removeClass('hide-title');
-//     }
-// }
-
-
 //Job Search
 var JobSearch = (function () {
 
@@ -106,21 +69,14 @@ var JobSearch = (function () {
     search.changeTitle = function () {
         var $title = $('.main-title');
         var searchSection = $('.search-section');
-
-        //hideTitle($isTitleHide);
-
     };
 
     //On input focus
     $jobInput.on('focus', function () {
-        // $isTitleHide = true;
-        //$(this).select();
-        // search.changeTitle();
     });
 
     //On input blur
     $jobInput.on('blur', function () {
-        // $isTitleHide = !$isTitleHide;
     });
 
     //Show category Popup
@@ -138,19 +94,13 @@ var JobSearch = (function () {
     return search;
 })();
 
-
 function loadJobsByCategory() {
     var category = SelectedCategory.categoryID;
 
-    // $('.job-input').find('input[type="text"]').val(category.sub[1]);
     $('.show-category').find('.selected-item span').text(category.main[1]);
     $('.job-input').find('input[type="text"]').focus();
     $('.subCategory').text(category.sub[1]);
 
-    // if($isTitleHide)
-    //$isTitleHide = true;
-
-    //JobSearch.changeTitle();
     //Call to server
     loadJobData(category);
     // hide popup
@@ -164,99 +114,217 @@ function responsivePageHeight() {
 
 (function () {
 
-    $(window).on('load resize', function () {
-        responsivePageHeight();
-        breakpoint = calSize();
-    });
-
     $('.navbar').removeClass('light-blue').css('backgroundColor', 'transparent');
 })();
 
 
-(function () {
+function calSize() {
+    var val = 0;
+    var deviceWidth = $(window)[0].innerWidth;
+    if (deviceWidth > 425) {
+        val = $titleOffset + 90;
+    } else {
+        val = $titleOffset - 80;
+    }
+    return val;
+}
 
-    var controller = new ScrollMagic.Controller(
-        {
-            addIndicators: false
-        }
-    );
-    var progress = 1;
-    var jobTitle = 'title';
-
-    function preventDefault(e) {
-        e = e || window.event;
-        if (e.preventDefault)
-            e.preventDefault();
-        e.returnValue = false;
+function scrollToDown() {
+    var _titleTopSpace = $titleOffset + 90;
+    if (!$(window).scrollTop() > 0) {
+        $("html, body").animate({scrollTop: _titleTopSpace}, 500);
+    } else {
+        $("html, body").scrollTop(_titleTopSpace);
     }
 
+}
 
-    var jobScene = new ScrollMagic.Scene({
-        triggerElement: '.search-section',
-        duration: '300%',
-        triggerHook: 0,
-        offset: breakpoint
-    });
 
-    jobScene.addTo(controller);
-    jobScene.setPin('.search-section', {pushFollowers: false});
-    jobScene.on('start', function () {
-        // window.onwheel = preventDefault;
-        // window.ontouch = preventDefault;
-        // setTimeout(function () {
-        //     window.onwheel = null;
-        // }, 1000)
-    });
+// (function () {
+//
+//     var controller = new ScrollMagic.Controller(
+//         {
+//             addIndicators: false
+//         }
+//     );
+//     var progress = 1;
+//     var jobTitle = 'title';
+//
+//     var jobScene = new ScrollMagic.Scene({
+//         triggerElement: '.search-section',
+//         duration: '300%',
+//         triggerHook: 0,
+//         offset: breakpoint
+//     });
+//
+//     jobScene.addTo(controller);
+//     jobScene.setPin('.search-section', {pushFollowers: false});
+//     jobScene.on('start', function () {
+//         // window.onwheel = preventDefault;
+//         // window.ontouch = preventDefault;
+//         // setTimeout(function () {
+//         //     window.onwheel = null;
+//         // }, 1000)
+//     });
+//
+//     //S 2
+//     var Scene = new ScrollMagic.Scene({
+//         triggerElement: '#title',
+//         duration: '30%',
+//         triggerHook: 0.3,
+//     });
+//
+//     Scene.addTo(controller);
+//
+//     Scene.on('progress', function (e) {
+//         // var opt = 1 - (e.progress);
+//         var opt = Math.max(0, Math.min(1, (1 - (e.progress))));
+//
+//         if(e.progress === 0) {
+//            // $('header').css({'pointer-events': 'auto'});
+//             $('header .navbar-nav').css({'pointer-events': 'auto'});
+//         }else {
+//            // $('header').css({'pointer-events': 'none'});
+//             $('header .navbar-nav').css({'opacity': opt,'pointer-events': 'none'});
+//         }
+//
+//         $('#title').css({'opacity': opt});
+//
+//         $('.filters').animate({'opacity': e.progress}, 0);
+//
+//         $('.full-height').css('height', '');
+//         console.log(e.progress)
+//
+//     });
+//
+//     Scene.on('start', function (e) {
+//         if (e.scrollDirection == "REVERSE") {
+//             $('.filters').css({'opacity': 0});
+//             responsivePageHeight();
+//         }
+//     });
+//
+//     Scene.on('shift', function (e) {
+//         // $('.filters').animate({'opacity': 1}, 0);
+//         //$('header').css({'pointer-events': 'none'});
+//         $('header .navbar-nav').css({'pointer-events': 'none'});
+//     });
+//
+//     $('#searchText').on('focus click', function () {
+//         scrollToDown();
+//     });
+//
+// })($);
 
-    //S 2
-    var Scene = new ScrollMagic.Scene({
-        triggerElement: '#title',
-        duration: '30%',
-        triggerHook: 0.3,
-    });
+//search scroll animation
+(function () {
 
-    Scene.addTo(controller);
+    var $header = $('header'),
+        $searchInput = $('#searchText'),
+        $searchArea = $('.search-area'),
+        $searchSection = $('.search-section'),
+        $loadAdvertisements = $('#ajaxLoadAdvertisements'),
+        $searchWrapper = $('#searchWrapper'),
+        $loadAdvertisementsPosition = 0,
+        $_scrollTop = 0,
+        isInputFocus = false;
 
-    Scene.on('progress', function (e) {
-        // var opt = 1 - (e.progress);
-        var opt = Math.max(0, Math.min(1, (1 - (e.progress))));
+    init();
 
-        if(e.progress === 0) {
-           // $('header').css({'pointer-events': 'auto'});
-            $('header .navbar-nav').css({'pointer-events': 'auto'});
-        }else {
-           // $('header').css({'pointer-events': 'none'});
-            $('header .navbar-nav').css({'opacity': opt,'pointer-events': 'none'});
-        }
+    function init() {
+        $header.addClass('absolute');
+        $searchWrapper.addClass('is-animate-bar');
 
-        $('#title').css({'opacity': opt});
-
-        $('.filters').animate({'opacity': e.progress}, 0);
-
-        $('.full-height').css('height', '');
-        console.log(e.progress)
-
-    });
-
-    Scene.on('start', function (e) {
-        if (e.scrollDirection == "REVERSE") {
-            $('.filters').css({'opacity': 0});
+        $(window).on('load resize', function () {
             responsivePageHeight();
+        });
+
+        watch();
+    }
+
+    function watch() {
+        watcher();
+        window.requestAnimationFrame(watch);
+    }
+
+    function watcher() {
+        $loadAdvertisementsPosition = ($loadAdvertisements.offset().top);
+    }
+
+    function scrollOnFocusInput() {
+        $("html, body").animate({scrollTop: $searchArea.offset().top - 30}, 500);
+        $searchArea.siblings('.filters').css('opacity', '1');
+    }
+
+    $(window).on('scroll', function () {
+        $_scrollTop = $(this).scrollTop();
+
+        var step1 = $loadAdvertisementsPosition,
+            step2 = $loadAdvertisementsPosition + 10,
+            stepUp1 = $loadAdvertisementsPosition - 50,
+            stepUp2 = $loadAdvertisementsPosition - 200;
+
+        if ($_scrollTop === 0) {
+
+            $searchArea.siblings('.filters').css('opacity', '0');
+            responsivePageHeight();
+
+        } else {
+
+            if (isInputFocus) {
+                $searchArea.siblings('.filters').css('opacity', '1');
+                $searchSection.css('height', 'auto')
+            }
         }
+
+        if ($_scrollTop > step1) {
+            $searchWrapper.addClass('is-fixed-search');
+        }
+
+        if ($_scrollTop > step2) {
+            if ($searchWrapper.hasClass('is-fixed-search')) {
+                $searchWrapper.addClass('is-down');
+                $searchArea.siblings('.filters').css('opacity', '1');
+                $loadAdvertisements.css('min-height', '700px');
+            }
+        }
+
+        if ($_scrollTop < stepUp1 && $_scrollTop < step1) {
+            if ($searchWrapper.hasClass('is-fixed-search')) {
+                $searchWrapper.removeClass('is-down');
+                $searchArea.siblings('.filters').css('opacity', '0');
+            }
+        }
+
+        if ($_scrollTop < stepUp2) {
+            if ($searchWrapper.hasClass('is-fixed-search')) {
+                $searchWrapper.removeClass('is-fixed-search');
+                $loadAdvertisements.css('min-height', '');
+            }
+        }
+
     });
 
-    Scene.on('shift', function (e) {
-        // $('.filters').animate({'opacity': 1}, 0);
-        //$('header').css({'pointer-events': 'none'});
-        $('header .navbar-nav').css({'pointer-events': 'none'});
+    $searchInput.on('focus click', function () {
+        scrollOnFocusInput();
+        isInputFocus = true;
     });
 
-    $('#searchText').on('focus click', function () {
-        scrollToDown();
+    $searchInput.on('blur', function () {
+        isInputFocus = false;
     });
 
-})($);
+    // var controller = new ScrollMagic.Controller(
+    //     {
+    //         addIndicators: false
+    //     }
+    // );
+    //
+    // var jobScene = new ScrollMagic.Scene({
+    //     triggerElement: '.search-section',
+    //     duration: '300%',
+    //     triggerHook: 0,
+    //     offset: breakpoint
+    // });
 
-
-
-
+})();
