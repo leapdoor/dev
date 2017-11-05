@@ -3191,7 +3191,7 @@ input[type="radio"] + label {
   float: left;
   position: relative;
   width: 100%;
-  min-height: 500px;
+  min-height: 1150px;
   margin: 30px 0; }
 
 .mCS-4you-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {

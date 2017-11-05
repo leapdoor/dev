@@ -258,11 +258,11 @@ function scrollToDown() {
 
     $(window).on('scroll', function () {
         $_scrollTop = $(this).scrollTop();
-
-        var step1 = $loadAdvertisementsPosition,
-            step2 = $loadAdvertisementsPosition + 10,
-            stepUp1 = $loadAdvertisementsPosition - 50,
-            stepUp2 = $loadAdvertisementsPosition - 200;
+        console.log($loadAdvertisementsPosition)
+        var step1 = $loadAdvertisementsPosition,//300
+            step2 = $loadAdvertisementsPosition + 130,//$loadAdvertisementsPosition + 50,//310
+            stepUp1 = $loadAdvertisementsPosition + 50,//$loadAdvertisementsPosition + 50,//250
+            stepUp2 = 667;//$loadAdvertisementsPosition + 30;//100
 
         if ($_scrollTop === 0) {
 
@@ -273,7 +273,7 @@ function scrollToDown() {
 
             if (isInputFocus) {
                 $searchArea.siblings('.filters').css('opacity', '1');
-                $searchSection.css('height', 'auto')
+                //$searchSection.css('height', 'auto')
             }
         }
 
@@ -285,21 +285,21 @@ function scrollToDown() {
             if ($searchWrapper.hasClass('is-fixed-search')) {
                 $searchWrapper.addClass('is-down');
                 $searchArea.siblings('.filters').css('opacity', '1');
-                $loadAdvertisements.css('min-height', '700px');
+                //$loadAdvertisements.css('min-height', '900px');
             }
         }
 
-        if ($_scrollTop < stepUp1 && $_scrollTop < step1) {
+        if ($_scrollTop < step2 && $_scrollTop > stepUp1) {
             if ($searchWrapper.hasClass('is-fixed-search')) {
                 $searchWrapper.removeClass('is-down');
                 $searchArea.siblings('.filters').css('opacity', '0');
             }
         }
 
-        if ($_scrollTop < stepUp2) {
+        if ($_scrollTop < stepUp1 - 20) {
             if ($searchWrapper.hasClass('is-fixed-search')) {
                 $searchWrapper.removeClass('is-fixed-search');
-                $loadAdvertisements.css('min-height', '');
+                //$loadAdvertisements.css('min-height', '');
             }
         }
 
