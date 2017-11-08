@@ -10,6 +10,11 @@ header {
   &.fixed {
     position: fixed;
   }
+
+  &.absolute {
+    position: absolute;
+  }
+
 }
 
 .hide-block {
@@ -359,6 +364,45 @@ header {
     margin-top: 80px;
     margin-bottom: 30px;
   }
+
+}
+.is-animate-bar {
+  @include transition(top ease-in-out .4s);
+}
+.is-fixed-search {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  margin: 0;
+  top: -100%;
+  z-index: 99;
+  @extend .gradient;
+  padding: 0 15%;
+
+  .search-area {
+    margin-top: 30px;
+  }
+
+  @include breakpoint($small) {
+    padding: 0 15px;
+  }
+
+  &.is-down {
+    top: 0;
+  }
+
+  //@include breakpoint($large) {
+  //  .search-area {
+  //    width: 1170px;
+  //    left: calc(50% - 585px);
+  //  }
+  //}
+  //
+  //@include breakpoint($small) {
+  //  .search-area {
+  //    width: 970px;
+  //    left: calc(50% - 485px);
+  //  }
 }
 
 .full-height {
@@ -714,9 +758,10 @@ input[type="radio"] {
   float: left;
   position: relative;
   width: 100%;
-  min-height: 500px;
+  min-height: 1150px;
   margin: 30px 0;
 }
+
 
 //Scroll Bar
 @mixin hoverBar {

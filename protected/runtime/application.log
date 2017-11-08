@@ -473,6 +473,7 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/project/Dev/css/bootstrap.min.css.map
 ---
+<<<<<<< HEAD
 2017/11/04 07:43:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
 ' in D:\xampp\htdocs\project\Dev\framework\db\CDbConnection.php:399
 Stack trace:
@@ -747,4 +748,3 @@ Stack trace:
 #21 {main}
 REQUEST_URI=/project/Dev/
 HTTP_REFERER=http://localhost/project/
----
