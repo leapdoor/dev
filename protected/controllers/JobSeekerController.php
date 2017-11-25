@@ -101,7 +101,7 @@ class JobSeekerController extends Controller {
         $model->js_dob = date('Y-m-d', strtotime($_POST['dob']));
         $model->js_experience_years = $_POST['experienceYear'];
         $model->js_experience_months = $_POST['experienceMonth'];
-        $model->js_highest_academic_quali = $_POST['highestAcaQuali'];
+        $model->js_highest_academic_quali = $_POST['ahaq_id'];
         $model->js_nameof_academic_quali = $_POST['nameOfAcaQuali'];
         $model->js_updated_time = date('Y-m-d H:i:s');
         $model->js_step1_is_finished = 1;
@@ -224,13 +224,13 @@ class JobSeekerController extends Controller {
 
             $model->ref_js_id = $jsId;
             $model->ref_industry_id = $_POST['ind_id'];
-            $model->ref_category_id = $_POST['cat_id'];
-            $model->ref_sub_category_id = $_POST['subCategories'];
-            $model->ref_designation_id = $_POST['designations'];
+            $model->ref_category_id = isset($_POST['cat_id']) == true && !isset($_POST['isFresher']) ? $_POST['cat_id'] : 0;
+            $model->ref_sub_category_id = isset($_POST['subCategories']) == true && !isset($_POST['isFresher']) ? $_POST['subCategories'] : 0;
+            $model->ref_designation_id = isset($_POST['designations']) == true && !isset($_POST['isFresher']) ? $_POST['designations'] : 0;
             $model->jsemp_expected_ref_industry_id = isset($_POST['ind_id']) == true ? $_POST['ind_id'] : 0;
-            $model->jsemp_expected_ref_category_id = isset($_POST['cat_id']) == true ? $_POST['cat_id'] : 0;
-            $model->jsemp_expected_sub_category_id = isset($_POST['subCategories']) == true ? $_POST['subCategories'] : 0;
-            $model->jsemp_expected_designation_id = isset($_POST['designations']) == true ? $_POST['designations'] : 0;
+            $model->jsemp_expected_ref_category_id = isset($_POST['cat_id']) == true && !isset($_POST['isFresher']) ? $_POST['cat_id'] : 0;
+            $model->jsemp_expected_sub_category_id = isset($_POST['subCategories']) == true && !isset($_POST['isFresher']) ? $_POST['subCategories'] : 0;
+            $model->jsemp_expected_designation_id = isset($_POST['designations']) == true && !isset($_POST['isFresher']) ? $_POST['designations'] : 0;
             $model->jsemp_expected_salary = 0;
             $model->jsemp_no_of_experience_years = 0;
             $model->jsemp_no_of_experience_months = 0;
@@ -260,6 +260,14 @@ class JobSeekerController extends Controller {
 
     public function actionSaveStepThree() {
         try {
+            $target_dir = "uploads/CV/Registered/";
+            if ($_FILES["JsBasic"]["name"]["cv"] != "") {
+                $status = Controller::validateCV($_FILES, $target_dir);
+                if ($status['status'] == 0) {
+                    $this->msgHandler(400, $status['reason'], array('status' => $status));
+                    exit;
+                }
+            }
             $skills = explode(',', $_POST['skills']);
             $skillsString = '';
             $skillsArray = array();
@@ -276,6 +284,15 @@ class JobSeekerController extends Controller {
             }
 
             $skillsString = implode(',', $skillsArray);
+           
+            $workTypes = AdmWorkType::model()->findAll();
+            $workTypeArray = array();
+            foreach ($workTypes as $workType) {
+                if (array_key_exists('workType_' . $workType->wt_id, $_POST)) {
+                    array_push($workTypeArray, $workType->wt_id);
+                }
+            }
+            $workTypesString = implode(',', $workTypeArray);
 
             $accessId = $_POST['accessId'];
             $jsBasicTempData = JsBasicTemp::model()->findByAttributes(array('jsbt_encrypted_id' => $accessId));
@@ -299,15 +316,19 @@ class JobSeekerController extends Controller {
             $model->jsemp_expected_sub_category_id = $_POST['subCategories'];
             $model->jsemp_expected_designation_id = $_POST['designations'];
             $model->jsemp_expected_salary = $_POST['salary'];
-            $model->jsemp_no_of_experience_years = $_POST['experience'];
-            $model->jsemp_no_of_experience_months = 0;
+            $model->jsemp_no_of_experience_years = $_POST['experienceYears'];
+            $model->jsemp_no_of_experience_months = $_POST['experienceMonths'];
             $model->jsemp_expected_cities_to_work = $_POST['city'];
             $model->jsemp_skills = $skillsString;
+            $model->jsemp_work_types = $workTypesString;
+            $model->jsemp_linkedin_url = $_POST['linkedin'];
+            $model->jsemp_is_actively_finding_job = $_POST['group2'];
+
             $model->jsemp_create_time = date('Y-m-d H:i:s');
             $model->jsemp_updated_time = date('Y-m-d H:i:s');
             if ($model->save(false)) {
                 $cvName = Controller::getJobSeekerReferenceNo($jsId);
-                $target_dir = "uploads/CV/Registered/";
+
                 $path = $this->UploadCV($_FILES, $target_dir, $cvName);
 
                 $jsBasic = JsBasic::model()->findByPk($jsId);
@@ -361,7 +382,8 @@ class JobSeekerController extends Controller {
                 $jsData = JsBasic::model()->findByPk($user->ref_emp_or_js_id);
                 $jsTempData = JsBasicTemp::model()->findByPk($jsData->ref_jsbt_id);
 
-                $this->redirect(array('JobSeeker/ViewJobSeekerRegistration', 'id' => $jsTempData->jsbt_encrypted_id));
+                $this->redirect(Yii::app()->request->redirect(Yii::app()->createAbsoluteUrl("JobSeeker/ViewJobSeekerRegistration/id/" . $jsTempData->jsbt_encrypted_id)));
+//                $this->redirect(array('JobSeeker/ViewJobSeekerRegistration', 'id' => $jsTempData->jsbt_encrypted_id));
             }
 
             $model = JsBasic::model()->findByAttributes(array('js_id' => $user->ref_emp_or_js_id));

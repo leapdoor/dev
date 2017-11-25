@@ -86,26 +86,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--                                <div class="row mb-15">
-                                                                    <div class="col-md-6">
-                                                                        <div class="selector dark designationsSelector">
-                                                                            <div class="selected-option">
-                                                                                <span>Designation</span>
-                                                                            </div>
-                                                                            <ul class="option-list"></ul>
-                                                                            <select class="type" name="designations" id="designations"></select>
-                                                                        </div>
-                                                                    </div>
-                                
-                                
-                                                                    <div class="col-md-6 showOnlyOther">
-                                                                        <div class="input-wrapper">
-                                                                            <input id="otherDesignation" name="otherDesignation" type="text" value="">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
-
                                 <div class="row mb-15">
                                     <div class="col-md-6">
                                         <div class="row">

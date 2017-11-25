@@ -10,13 +10,14 @@ class UserController extends Controller {
         $userId = Yii::app()->user->id;
         $user = User::model()->findByPk($userId);
         $userType = $user->user_type;
-    
+
         if ($userType == 1) {
             if ($user->user_is_finished == 0) {
                 $jsData = JsBasic::model()->findByPk($user->ref_emp_or_js_id);
                 $jsTempData = JsBasicTemp::model()->findByPk($jsData->ref_jsbt_id);
-        
-                $this->redirect(array('JobSeeker/ViewJobSeekerRegistration/id/'.$jsTempData->jsbt_encrypted_id));
+
+
+                $this->redirect(Yii::app()->request->redirect(Yii::app()->createAbsoluteUrl("JobSeeker/ViewJobSeekerRegistration/id", array("id" => $jsTempData->jsbt_encrypted_id))));
             }
 
             $model = JsBasic::model()->findByAttributes(array('js_id' => $user->ref_emp_or_js_id));

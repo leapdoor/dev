@@ -4,7 +4,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data',
         'novalidate' => 'novalidate',
-    )));
+        )));
 ?>
 <div class="col-md-12 ">
     <div class="row mb-15">
@@ -15,7 +15,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                 </div>
                 <ul class="option-list"></ul>
 
-                <?php echo Chtml::dropDownList('ind_id', "", CHtml::listData(AdmIndustry::model()->findAll(), 'ind_id', 'ind_name'), array('empty' => 'Select Industry')); ?>
+                <?php echo Chtml::dropDownList('ind_id', "", CHtml::listData(AdmIndustry::model()->findAll(), 'ind_id', 'ind_name'), array('empty' => 'Select Industry', 'required' => 'required')); ?>
             </div>
         </div>
 
@@ -28,8 +28,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     <span>Category (Field)</span>
                 </div>
                 <ul class="option-list"></ul>
-
-                <?php echo Chtml::dropDownList('cat_id', "", CHtml::listData(AdmCategory::model()->findAll(array('order' => 'cat_order')), 'cat_id', 'cat_name'), array('empty' => 'Select Category', 'onChange' => 'loadSubCategories()')); ?>
+                <?php echo Chtml::dropDownList('cat_id', "", CHtml::listData(AdmCategory::model()->findAll(array('order' => 'cat_order')), 'cat_id', 'cat_name'), array('empty' => 'Select Category', 'required' => 'required', 'onChange' => 'loadSubCategories()')); ?>
             </div>
         </div>
 
@@ -40,7 +39,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                 </div>
                 <ul class="option-list"></ul>
 
-                <select class="type" name="subCategories" id="subCategories">
+                <select class="type" name="subCategories" id="subCategories" required>
                     <option id="0">Select Sub Category</option>
                 </select>
             </div>
@@ -58,7 +57,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                 </div>
                 <ul class="option-list"></ul>
 
-                <select class="type" name="designations" id="designations">
+                <select class="type" name="designations" id="designations" required>
 
                 </select>
             </div>
@@ -75,10 +74,9 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     ?>
                     <div class="d-table-cell">
                         <input type="checkbox" id="<?php echo $workType->wt_id; ?>"
-                               name="<?php echo $workType->wt_id; ?>">
+                               name="<?php echo 'workType_' . $workType->wt_id; ?>" value="<?php echo $workType->wt_id; ?>">
                         <label for="<?php echo $workType->wt_id; ?>"><?php echo $workType->wt_name; ?></label>
                     </div>
-
 
                     <?php
                 }
@@ -96,21 +94,21 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                 <div class="col-md-6">
                     <div class="input-wrapper mb-0 text-top">
                         <span class="side-label">Year</span>
-                        <input class="mt-0" id="" name="" type="text" value="0">
+                        <input class="mt-0" id="experienceYears" name="experienceYears" type="text" value="0">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="input-wrapper mb-0 text-top">
                         <span class="side-label">Month</span>
-                        <input class="mt-0" id="" name="" type="text" value="0">
+                        <input class="mt-0" id="experienceMonths" name="experienceMonths" type="text" value="0">
                     </div>
                 </div>
             </div>
 
-<!--            <div class="input-wrapper">-->
-<!--                <input id="experience" name="experience" type="text" required>-->
-<!--                <div class="float-text">Relevant No of years Experience</div>-->
-<!--            </div>-->
+            <!--            <div class="input-wrapper">-->
+            <!--                <input id="experience" name="experience" type="text" required>-->
+            <!--                <div class="float-text">Relevant No of years Experience</div>-->
+            <!--            </div>-->
         </div>
         <div class="col-md-6">
             <div class="input-wrapper">
@@ -122,14 +120,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
 
     <div class="row mb-15 mt-35">
         <div class="col-md-6">
-            <input id="a" name="group2" type="radio" checked="checked">
-            <label for="a">Actively looking right now </label>
+            <input id="activelylooking" name="group2" value="1" type="radio" checked="checked">
+            <label for="activelylooking">Actively looking right now </label>
             <p class="text-dark-blue text-light-3 f-12 ml-25 mt-7">Maximum matches. We'll get you in front of
                 employers ASAP and send you any new jobs that match your interests.</p>
         </div>
         <div class="col-md-6">
-            <input id="s" name="group2" type="radio">
-            <label for="s">Open, but not actively looking</label>
+            <input id="activelynotlooking" name="group2" value="2" type="radio">
+            <label for="activelynotlooking">Open, but not actively looking</label>
             <p class="text-dark-blue text-light-3 f-12 ml-25 mt-7">Fewer matches. Employers can find you and we'll
                 be selective with the matches we send. </p>
         </div>
@@ -202,7 +200,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                 </div>
                 <div class="d-table-cell width-100">
                     <div class="input-wrapper">
-                        <input id="" name="" type="text">
+                        <input id="linkedin" name="linkedin" type="text">
                         <div class="float-text">Linked in Account</div>
                     </div>
                 </div>
@@ -361,10 +359,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     addEmptyToAjaxDropDowns('subCategories', 'Sub Category');
                     for (var i = 0, max = subCats.length; i < max; i++) {
                         $('#subCategories').append(
-                            $("<option>" + subCats[i]['scat_name'] + "</option>")
+                                $("<option>" + subCats[i]['scat_name'] + "</option>")
                                 .attr("value", subCats[i]['scat_id'])
                                 .text(subCats[i]['scat_name'])
-                        );
+                                );
                     }
 
                     setTimeout(function () {
@@ -393,10 +391,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     addEmptyToAjaxDropDowns('designations', 'Designation');
                     for (var i = 0, max = designations.length; i < max; i++) {
                         $('#designations').append(
-                            $("<option>" + designations[i]['desig_name'] + "</option>")
+                                $("<option>" + designations[i]['desig_name'] + "</option>")
                                 .attr("value", designations[i]['desig_id'])
                                 .text(designations[i]['desig_name'])
-                        );
+                                );
                     }
 
                     setTimeout(function () {
@@ -422,10 +420,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     addEmptyToAjaxDropDowns('city', 'city');
                     for (var i = 0, max = cities.length; i < max; i++) {
                         $('#city').append(
-                            $("<option>" + cities[i]['city_name'] + "</option>")
+                                $("<option>" + cities[i]['city_name'] + "</option>")
                                 .attr("value", cities[i]['city_id'])
                                 .text(cities[i]['city_name'])
-                        );
+                                );
                     }
 
                     setTimeout(function () {
@@ -509,6 +507,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepThree',
                     success: function (responce) {
                         if (responce.code == 200) {
                             window.location = http_path + 'Site/Index';
+                        } else {
+                            Animation.hide();
                         }
                     }
                 });
