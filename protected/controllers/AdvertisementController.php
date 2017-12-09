@@ -1,5 +1,5 @@
-<?php
-
+<?php 
+//
 class AdvertisementController extends Controller {
 
 //    public function init() {

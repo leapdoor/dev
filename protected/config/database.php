@@ -7,11 +7,11 @@ return array(
 
 //'connectionString' => 'mysql:host=192.168.1.14;dbname=srlc',
 //'connectionString' => 'mysql:host=192.168.43.109;dbname=srlc',
-    'connectionString' => 'mysql:host=localhost:3306;dbname=sr',
+    'connectionString' => 'mysql:host=localhost:3306;dbname=database1',
     'emulatePrepare' => true,
     'username' => 'root',
 //	'password' => 'managerinfo1',
-    'password' => '',
+    'password' => 'chathu123',
 //    'password' => 'BattelShip',
     'charset' => 'utf8',
 
