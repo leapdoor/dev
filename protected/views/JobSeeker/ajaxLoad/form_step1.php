@@ -4,7 +4,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepOne',
         'enctype' => 'multipart/form-data',
         'novalidate' => 'novalidate',
     )
-));
+        ));
 ?>
 <div class="col-md-12">
     <div class="row mb-15">
@@ -58,13 +58,16 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepOne',
         </div>
 
         <div class="col-md-6">
-            <div class="input-wrapper">
-                <input id="highestAcaQuali" name="highestAcaQuali" type="text"
-                       value="<?php echo $jsBasicData->js_highest_academic_quali; ?>">
-                <div class="float-text">Highest Acadamic Qualification</div>
+            <div class="selector dark">
+                <div class="selected-option">
+                    <span>Highest Acadamic Qualification</span>
+                </div>
+
+                <ul class="option-list"></ul>
+                <?php echo Chtml::dropDownList('ahaq_id', "", CHtml::listData(AdmHigherAcademicQuali::model()->findAll(), 'ahaq_id', 'ahaq_name'), array('empty' => 'Select Higher Academic Qualification', 'options' => array($jsBasicData->js_highest_academic_quali => array('selected' => true)))); ?>               
+
             </div>
         </div>
-
     </div>
 
 
@@ -175,6 +178,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepOne',
     selectStep(0);
 
     Input.init();
+    Select.init();
 
     //Date piker
     $('.datePicker').datepicker({
@@ -205,9 +209,9 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepOne',
 
         $('.addInput').on('click', function () {
             var $this = $(this),
-                $inputCollection = $this.parents('.input-collection'),
-                $inputContainer = $inputCollection.find('.input-container'),
-                $dataButton = $this.attr('data-btn');
+                    $inputCollection = $this.parents('.input-collection'),
+                    $inputContainer = $inputCollection.find('.input-container'),
+                    $dataButton = $this.attr('data-btn');
 
             if ($this.hasClass('membership')) {
                 $inputContainer.append(htmlInput('Membership', $dataButton));

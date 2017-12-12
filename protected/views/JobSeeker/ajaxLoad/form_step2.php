@@ -1,8 +1,8 @@
 <?php
 $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOptions' => array(
-    'enctype' => 'multipart/form-data',
-    'novalidate' => 'novalidate',
-)));
+        'enctype' => 'multipart/form-data',
+        'novalidate' => 'novalidate',
+        )));
 ?>
 <div class="col-md-12 ">
 
@@ -22,8 +22,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOpti
 
         <div class="col-md-6">
             <div class="state-wrapper">
-                <input type="checkbox" id="s" class="fresherChb" name="isFresher">
-                <label for="s">Still I am a Fresher</label>
+                <input type="checkbox" id="isFresher" class="fresherChb" name="isFresher" <?php echo $jsEmploymentData->jsemp_is_fresher == 1 ? "checked=checked" : "" ?>>
+                <label for="isFresher">Still I am a Fresher</label>
             </div>
         </div>
 
@@ -48,7 +48,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOpti
                 </div>
                 <ul class="option-list"></ul>
 
-                <select class="type" name="subCategories" id="subCategories">
+                <select class="type" name="subCategories" id="subCategories" required="required">
                 </select>
             </div>
         </div>
@@ -112,14 +112,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOpti
                     addEmptyToAjaxDropDowns("subCategories", 'Sub Categories');
                     for (var i = 0, max = subCats.length; i < max; i++) {
                         $('#subCategories').append(
-                            $("<option>" + subCats[i]['scat_name'] + "</option>")
+                                $("<option>" + subCats[i]['scat_name'] + "</option>")
                                 .attr("value", subCats[i]['scat_id'])
                                 .text(subCats[i]['scat_name'])
-                        );
+                                );
                     }
 
                     setTimeout(function () {
-                        //$("#subCategories option[value=" + '<?php //echo $jsEmploymentData->ref_sub_category_id;    ?>' + "]").prop("selected", true);
+                        //$("#subCategories option[value=" + '<?php //echo $jsEmploymentData->ref_sub_category_id;     ?>' + "]").prop("selected", true);
                         Select.init('.subCategories-select');
                     }, 200);
 
@@ -145,10 +145,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOpti
                     addEmptyToAjaxDropDowns('designations', 'Designations');
                     for (var i = 0, max = designations.length; i < max; i++) {
                         $('#designations').append(
-                            $("<option>" + designations[i]['desig_name'] + "</option>")
+                                $("<option>" + designations[i]['desig_name'] + "</option>")
                                 .attr("value", designations[i]['desig_id'])
                                 .text(designations[i]['desig_name'])
-                        );
+                                );
                     }
 
                     setTimeout(function () {
@@ -230,10 +230,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formStepTwo', 'htmlOpti
     function addEmptyToAjaxDropDowns(id, defaultText) {
         var text = defaultText != undefined ? defaultText : "Select";
         $('#' + id).append(
-            $("<option>Select</option>")
+                $("<option>Select</option>")
                 .attr("value", 0)
                 .text("Select")
-        );
+                );
     }
 
 
