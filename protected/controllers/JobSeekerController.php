@@ -416,7 +416,7 @@ class JobSeekerController extends Controller {
         $this->renderPartial('/JobSeeker/ajaxLoad/currentPositionInfo');
     }
 
-    public function actionCurrentPositionInfoEdit() {
+    public function actionCurrentPositionInfoEdit() { //test
         $jobSeekerId = $this->getRefEmpOrJsId(Yii::app()->user->id);
         $jsBasic = JsBasic::model()->findByPk($jobSeekerId);
         $jsEmploymentData = JsEmploymentData::model()->findByAttributes(array('ref_js_id' => $jsBasic->js_id));
