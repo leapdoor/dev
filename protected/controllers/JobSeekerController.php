@@ -404,7 +404,7 @@ class JobSeekerController extends Controller {
         $this->renderPartial('/JobSeeker/ajaxLoad/personalInformation', array('jsBasic' => $jsBasic, 'jsProfQualifications' => $jsProfQualifications, 'jsMemberships' => $jsMemberships));
     }
 
-    public function actionPersonalInfoEdit() {
+    public function actionPersonalInfoEdit() {  
         $jobSeekerId = $this->getRefEmpOrJsId(Yii::app()->user->id);
         $jsBasic = JsBasic::model()->findByPk($jobSeekerId);
         $jsProfQualifications = JsQualifications::model()->findAllByAttributes(array('ref_js_id' => $jsBasic->js_id, 'jsquali_type' => 1));
