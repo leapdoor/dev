@@ -14,3 +14,7 @@ Thumbs.db
 /node_modules/
 /uploads/company/logo/
 !/uploads/company/logo/
+/uploads/CV/Registered/*
+/uploads/CV/Unregistered/*
+/uploads/JobAdvertisements/2017/*
+/uploads/JobAdvertisements/2018/*
