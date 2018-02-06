@@ -1,25 +1,25 @@
 <?php $form = $this->beginWidget('CActiveForm', array('id' => 'login')); ?>
 
-<div class="login-form ">
+<div class="col-md-12 login-form ">
     <div class="row mb-0">
-        <div class="col s4 push-s4">
+        <div class="col-md-4 col-md-offset-4">
             <div class="card-panel login-panel">
-                <h5 class="grey-text text-darken-2 mb-30">Login</h5>
+                <h5 class="f-24 grey-text text-darken-2 mb-30">Login</h5>
 
                 <form action="">
                     <div class="row">
-                        <div class="col s12">
-                            <div class="input-field">
-                                <input id="username" autocomplete="off" name="username" type="text" required>
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label>Username</label>
+                                <input id="username" class="form-control" autocomplete="off" name="username" type="text" required>
                             </div>
-                            <div class="input-field">
-                                <input id="password" autocomplete="off" name="password" type="password" required>
+                            <div class="form-group">
                                 <label>Password</label>
+                                <input id="password" class="form-control" autocomplete="off" name="password" type="password" required>
                             </div>
                         </div>
-                        <div class="col s12 mt-15">
-                            <button type="button" onclick="login()" class="btn-login btn waves-light waves-effect blue">
+                        <div class="col-md-12 mt-15 text-right">
+                            <button type="button" onclick="login()" class="btn-login btn-primary btn">
                                 Login
                             </button>
                         </div>

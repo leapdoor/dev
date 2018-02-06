@@ -11,8 +11,8 @@
         <!--========================================================
            Stylesheet
        =========================================================-->
-        <!--CSS | Materialize-->
-        <link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/materialize.min.css">
+        <!--CSS | Bootstrap-->
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css/bootstrap.min.css">
         <!--CSS | Materialize Icons-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--CSS | Common-->
@@ -26,8 +26,8 @@
         =========================================================-->
         <!--JS | Jquery Lib-->
         <script src="<?php echo Yii::app()->baseUrl . '/js/lib/jquery-3.2.1.min.js'; ?>"></script>
-        <!--JS | Materialize-->
-        <script src="<?php echo $this->module->assetsUrl . '/js/materialize.min.js'; ?>"></script>
+        <!--JS | Bootstrap-->
+        <script src="<?php echo Yii::app()->baseUrl . '/js/bootstrap.min.js'; ?>"></script>
         <!--JS | Lodash-->
         <script src="<?php echo Yii::app()->baseUrl . '/js/lib/lodash-4.17.4.min.js'; ?>"></script>
         <!--JS | Sweet Alert-->
@@ -46,10 +46,12 @@
 
             <?php echo $content; ?>
 
-            <div class="row">
-                <div class="col s4 offset-s4">
-                    <!--Message area-->
-                    <div class="card-panel adm-alert" role="alert"></div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <!--Message area-->
+                        <div class="card-panel adm-alert" role="alert"></div>
+                    </div>
                 </div>
             </div>
         </div>
