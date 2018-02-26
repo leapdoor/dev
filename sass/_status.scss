@@ -36,6 +36,11 @@ header {
 
       img {
         width: auto;
+
+        @include breakpoint($small) {
+          width: 60px;
+          margin: 15px;
+        }
       }
     }
 
@@ -80,7 +85,7 @@ header {
 }
 
 .navbar-nav {
-  padding: 12px 15px;
+  padding: 16px 15px;
 
   @include breakpoint($small) {
     background: $primary;
@@ -315,6 +320,11 @@ header {
           display: inline-block;
           width: 100%;
           font-weight: $font-w-light;
+
+          @include breakpoint($small) {
+            text-align: left;
+          }
+
         }
         span {
 
@@ -366,9 +376,11 @@ header {
   }
 
 }
+
 .is-animate-bar {
   @include transition(top ease-in-out .4s);
 }
+
 .is-fixed-search {
   position: fixed;
   width: 100%;
@@ -380,7 +392,7 @@ header {
   padding: 0 15%;
 
   .search-area {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 
   @include breakpoint($small) {
@@ -389,6 +401,32 @@ header {
 
   &.is-down {
     top: 0;
+  }
+
+  .search-box {
+    min-height: 44px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    .job-drop-down,
+    .job-input {
+      padding: 10px 15px;
+    }
+
+    .job-drop-down {
+      .selected-item {
+        font-size: 18px;
+      }
+    }
+    .job-input input[type="text"] {
+      height: 24px;
+      font-size: 18px;
+    }
+
+    .icon-arrow-down.right {
+      top: 18px;
+    }
   }
 
   //@include breakpoint($large) {
@@ -758,10 +796,9 @@ input[type="radio"] {
   float: left;
   position: relative;
   width: 100%;
-  min-height: 1150px;
+  height: 1150px;
   margin: 30px 0;
 }
-
 
 //Scroll Bar
 @mixin hoverBar {

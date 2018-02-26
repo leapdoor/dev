@@ -107,14 +107,23 @@ function loadJobsByCategory() {
     Popup.hide();
 }
 
+var searchDivHeight = $('.full-height').innerHeight();
+
+setPageHeight();
+
+function setPageHeight() {
+    var pageHeight = responsivePageHeight();
+    $('.full-height').css('padding-bottom', (pageHeight - searchDivHeight) + 'px');
+}
+
+
 function responsivePageHeight() {
-    var pageHeight = $(window)[0].innerHeight;
-    $('.full-height').css('height', pageHeight + 'px');
+    return $(window)[0].innerHeight;
 }
 
 (function () {
 
-    $('.navbar').removeClass('light-blue').css('backgroundColor', 'transparent');
+    //$('.navbar').removeClass('light-blue').css('backgroundColor', 'transparent');
 })();
 
 
@@ -130,95 +139,21 @@ function calSize() {
 }
 
 function scrollToDown() {
-    var _titleTopSpace = $titleOffset + 90;
-    if (!$(window).scrollTop() > 0) {
+
+    var _titleTopSpace = $titleOffset + 90,
+        $searchSection = $('.search-section'),
+        $searchArea = $('.search-area');
+
+    var $pageHeight = responsivePageHeight();
+
+    if ($(window).scrollTop() > 0) {
         $("html, body").animate({scrollTop: _titleTopSpace}, 500);
-    } else {
-        $("html, body").scrollTop(_titleTopSpace);
     }
 
 }
 
 
-// (function () {
-//
-//     var controller = new ScrollMagic.Controller(
-//         {
-//             addIndicators: false
-//         }
-//     );
-//     var progress = 1;
-//     var jobTitle = 'title';
-//
-//     var jobScene = new ScrollMagic.Scene({
-//         triggerElement: '.search-section',
-//         duration: '300%',
-//         triggerHook: 0,
-//         offset: breakpoint
-//     });
-//
-//     jobScene.addTo(controller);
-//     jobScene.setPin('.search-section', {pushFollowers: false});
-//     jobScene.on('start', function () {
-//         // window.onwheel = preventDefault;
-//         // window.ontouch = preventDefault;
-//         // setTimeout(function () {
-//         //     window.onwheel = null;
-//         // }, 1000)
-//     });
-//
-//     //S 2
-//     var Scene = new ScrollMagic.Scene({
-//         triggerElement: '#title',
-//         duration: '30%',
-//         triggerHook: 0.3,
-//     });
-//
-//     Scene.addTo(controller);
-//
-//     Scene.on('progress', function (e) {
-//         // var opt = 1 - (e.progress);
-//         var opt = Math.max(0, Math.min(1, (1 - (e.progress))));
-//
-//         if(e.progress === 0) {
-//            // $('header').css({'pointer-events': 'auto'});
-//             $('header .navbar-nav').css({'pointer-events': 'auto'});
-//         }else {
-//            // $('header').css({'pointer-events': 'none'});
-//             $('header .navbar-nav').css({'opacity': opt,'pointer-events': 'none'});
-//         }
-//
-//         $('#title').css({'opacity': opt});
-//
-//         $('.filters').animate({'opacity': e.progress}, 0);
-//
-//         $('.full-height').css('height', '');
-//         console.log(e.progress)
-//
-//     });
-//
-//     Scene.on('start', function (e) {
-//         if (e.scrollDirection == "REVERSE") {
-//             $('.filters').css({'opacity': 0});
-//             responsivePageHeight();
-//         }
-//     });
-//
-//     Scene.on('shift', function (e) {
-//         // $('.filters').animate({'opacity': 1}, 0);
-//         //$('header').css({'pointer-events': 'none'});
-//         $('header .navbar-nav').css({'pointer-events': 'none'});
-//     });
-//
-//     $('#searchText').on('focus click', function () {
-//         scrollToDown();
-//     });
-//
-// })($);
-
-//search scroll animation
 (function () {
-
     var $header = $('header'),
         $searchInput = $('#searchText'),
         $searchArea = $('.search-area'),
@@ -229,102 +164,87 @@ function scrollToDown() {
         $_scrollTop = 0,
         isInputFocus = false;
 
-    init();
+    var $pageHeight = responsivePageHeight();
 
     function init() {
         $header.addClass('absolute');
         $searchWrapper.addClass('is-animate-bar');
-
-        $(window).on('load resize', function () {
-            responsivePageHeight();
-        });
-
-        watch();
     }
 
-    function watch() {
-        watcher();
-        window.requestAnimationFrame(watch);
-    }
-
-    function watcher() {
-        $loadAdvertisementsPosition = ($loadAdvertisements.offset().top);
-    }
+    var lastScrollVal = 0;
 
     function scrollOnFocusInput() {
         $("html, body").animate({scrollTop: $searchArea.offset().top - 30}, 500);
         $searchArea.siblings('.filters').css('opacity', '1');
     }
 
-    $(window).on('scroll', function () {
-        $_scrollTop = $(this).scrollTop();
-        console.log($loadAdvertisementsPosition)
-        var step1 = $loadAdvertisementsPosition,//300
-            step2 = $loadAdvertisementsPosition + 130,//$loadAdvertisementsPosition + 50,//310
-            stepUp1 = $loadAdvertisementsPosition + 50,//$loadAdvertisementsPosition + 50,//250
-            stepUp2 = 667;//$loadAdvertisementsPosition + 30;//100
+    function scrollDirection(e) {
+        var currentScrollVal = $(window).scrollTop(),
+            result;
 
-        if ($_scrollTop === 0) {
+        result = currentScrollVal > lastScrollVal ? 'DOWN' : 'UP';
+        lastScrollVal = currentScrollVal;
 
-            $searchArea.siblings('.filters').css('opacity', '0');
-            responsivePageHeight();
+        return result;
+    }
+
+    $(window).on('scroll', function (e) {
+
+        var $_scroll = $(window).scrollTop(),
+            $searchWrapperHeight = $searchWrapper.height() + 3,
+            topVal = $searchWrapperHeight * -1;
+
+        if (scrollDirection() === "DOWN") {
+            if ($_scroll > $pageHeight) {
+                $searchWrapper.addClass('is-fixed-search');
+                $searchWrapper.css({'top': topVal + 'px'});
+            }
+            $searchSection.css('padding-bottom', '30px');
 
         } else {
 
-            if (isInputFocus) {
-                $searchArea.siblings('.filters').css('opacity', '1');
-                //$searchSection.css('height', 'auto')
-            }
-        }
-
-        if ($_scrollTop > step1) {
-            $searchWrapper.addClass('is-fixed-search');
-        }
-
-        if ($_scrollTop > step2) {
-            if ($searchWrapper.hasClass('is-fixed-search')) {
-                $searchWrapper.addClass('is-down');
-                $searchArea.siblings('.filters').css('opacity', '1');
-                //$loadAdvertisements.css('min-height', '900px');
-            }
-        }
-
-        if ($_scrollTop < step2 && $_scrollTop > stepUp1) {
-            if ($searchWrapper.hasClass('is-fixed-search')) {
-                $searchWrapper.removeClass('is-down');
-                $searchArea.siblings('.filters').css('opacity', '0');
-            }
-        }
-
-        if ($_scrollTop < stepUp1 - 20) {
-            if ($searchWrapper.hasClass('is-fixed-search')) {
+            //when call at scroll up
+            if ($_scroll < $pageHeight) {
                 $searchWrapper.removeClass('is-fixed-search');
-                //$loadAdvertisements.css('min-height', '');
+                $searchWrapper.removeAttrs('style');
+
+            } else if ($_scroll < $pageHeight + 10) {
+
+                $searchWrapper.css({'top': topVal + 'px'});
+
+            } else {
+
+                $searchArea.siblings('.filters').css('opacity', '1');
+                $searchWrapper.css({'top': '0'});
+
+            }
+
+            if ($_scroll === 0) {
+                $searchArea.siblings('.filters').css('opacity', '0');
+                $searchSection.css('padding-bottom', ($pageHeight - searchDivHeight) + 'px');
             }
         }
-
     });
 
     $searchInput.on('focus click', function () {
         scrollOnFocusInput();
-        isInputFocus = true;
     });
 
-    $searchInput.on('blur', function () {
-        isInputFocus = false;
+    $searchInput.on('keyup', function () {
+       //$(this).trigger('click');
     });
 
-    // var controller = new ScrollMagic.Controller(
-    //     {
-    //         addIndicators: false
-    //     }
-    // );
-    //
-    // var jobScene = new ScrollMagic.Scene({
-    //     triggerElement: '.search-section',
-    //     duration: '300%',
-    //     triggerHook: 0,
-    //     offset: breakpoint
-    // });
+    init();
 
 })();
+
+function scrollFun() {
+    var $jobList = $('.job-list'),
+        $searchInput = $('#searchText'),
+        $searchArea = $('.search-area'),
+        $pageHeight = responsivePageHeight(),
+        $searchWrapper = $('#searchWrapper');
+
+    $searchWrapper.css({'top': 0});
+    scrollToDown();
+}
