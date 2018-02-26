@@ -2,16 +2,19 @@
 //CSS
 //mScroll CSS
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/scrollbar/jquery.mCustomScrollbar.min.css', 'screen');
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/site.css', 'screen');
 
 // mScroll Bar
 Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js', CClientScript::POS_HEAD);
 ?>
 
+<style>
 
+</style>
 
 
 <?php $form = $this->beginWidget('CActiveForm', array('id' => 'frmSearch')); ?>
-<section class="main-block search-section gradient full-height pb-30">
+<section class="main-block search-section gradient full-height ">
     <div class="container">
         <div class="row">
 

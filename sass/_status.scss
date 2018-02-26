@@ -36,6 +36,11 @@ header {
 
       img {
         width: auto;
+
+        @include breakpoint($small) {
+          width: 60px;
+          margin: 15px;
+        }
       }
     }
 
@@ -80,7 +85,7 @@ header {
 }
 
 .navbar-nav {
-  padding: 12px 15px;
+  padding: 16px 15px;
 
   @include breakpoint($small) {
     background: $primary;
@@ -315,6 +320,11 @@ header {
           display: inline-block;
           width: 100%;
           font-weight: $font-w-light;
+
+          @include breakpoint($small) {
+            text-align: left;
+          }
+
         }
         span {
 

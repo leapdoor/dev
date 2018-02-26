@@ -3,6 +3,7 @@ input.cm-btn,
 button.cm-btn,
 a.cm-btn {
   color: $white;
+  vertical-align: middle;
   padding: 7px 20px;
   font-size: $base-font-size;
   @include border-radius(2px);
@@ -12,6 +13,12 @@ a.cm-btn {
   margin-left: 0;
   background: $gray-light;
   text-transform: uppercase;
+
+  @include breakpoint($small) {
+    display: block;
+    width: 100%;
+    margin-bottom:3px;
+  }
 
   &.right {
     float: right;

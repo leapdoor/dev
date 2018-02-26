@@ -5,46 +5,50 @@
 
         <div class="row">
             <div class="col-md-6">
-                <input class="radio-group" data-show="job_seeker" id="job_seeker" checked="checked" name="group1"
-                       type="radio">
-                <label for="job_seeker">Job Seeker</label>
+                <div class="checkbox-wrapper">
+                    <input class="radio-group" data-show="job_seeker" id="job_seeker" checked="checked" name="group1"
+                           type="radio">
+                    <label for="job_seeker">Job Seeker</label>
+                </div>
             </div>
             <div class="col-md-6">
-                <input  class="radio-group " data-show="employer" id="employer" name="group1" type="radio">
-                <label for="employer">Employer</label>
+                <div class="radio-wrapper">
+                    <input class="radio-group " data-show="employer" id="employer" name="group1" type="radio">
+                    <label for="employer">Employer</label>
+                </div>
             </div>
 
-<!--            <div class="col-md-12">
-                <h5 class="text-black text-light-2 text-uppercase" style="color: #fbab18;">Register as an Employer</h5>
-            </div>-->
+            <!--            <div class="col-md-12">
+                            <h5 class="text-black text-light-2 text-uppercase" style="color: #fbab18;">Register as an Employer</h5>
+                        </div>-->
 
-            <div class="col-md-12 mt-10 hide-show job_seeker">
-                <div class="input-wrapper">
+            <div class="col-md-12 hide-show job_seeker">
+                <div class="input-wrapper ">
                     <input id="fname" name="fname" type="text" required>
                     <div class="float-text">First Name</div>
                 </div>
 
-                <div class="input-wrapper">
+                <div class="input-wrapper ">
                     <input id="lname" name="lname" type="text">
                     <div class="float-text">Last Name</div>
                 </div>
             </div>
 
-            <div class="col-md-12 mt-10 hide-show employer ">
-                <div class="input-wrapper">
+            <div class="col-md-12 hide-show employer ">
+                <div class="input-wrapper ">
                     <input id="cname" name="cname" type="text" required>
                     <div class="float-text">Company Name</div>
                 </div>
             </div>
 
             <div class="col-md-12 ">
-                <div class="input-wrapper">
+                <div class="input-wrapper ">
                     <input id="email" name="email" type="text" required>
                     <!--                        <input id="email" name="email" type="text" onblur="validateEmail(this.value)" required>-->
                     <div class="float-text">Email</div>
                 </div>
 
-                <div class="input-wrapper">
+                <div class="input-wrapper ">
                     <input id="contactNo" name="contactNo" type="text" required>
                     <div class="float-text">Contact No</div>
                 </div>

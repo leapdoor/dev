@@ -4,7 +4,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formContactUs',
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data',
         'novalidate' => 'novalidate',
-        )));
+    )));
 ?>
 <div class="nav-bar-space"></div>
 
@@ -15,29 +15,27 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'formContactUs',
             <div class="col-sm-12 col-md-8 col-md-offset-2 mb-30">
                 <div class="row mb-20">
                     <div class="col-md-12">
-                        <div class="input-wrapper">
+                        <div class="input-wrapper with-gap">
                             <input type="text" name="name" id="name">
                             <div class="float-text">Name</div>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-20">
+
                     <div class="col-md-6">
-                        <div class="input-wrapper">
+                        <div class="input-wrapper with-gap">
                             <input type="email" name="email" id="email">
                             <div class="float-text">Email</div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="input-wrapper">
+                        <div class="input-wrapper with-gap">
                             <input type="text" name="contactNo">
                             <div class="float-text">Contact No.</div>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-20">
+
                     <div class="col-md-12">
-                        <div class="input-wrapper">
+                        <div class="input-wrapper with-gap">
                             <textarea name="message" cols="30" rows="10"></textarea>
                             <div class="float-text">Message</div>
                         </div>

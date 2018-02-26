@@ -87,8 +87,8 @@ $jobPostText = $adData->ad_is_image == 2 ? $adData->ad_text : "";
 
                             <input type="hidden" name="id" value="<?php echo $currentPage . '-' . $adData->ad_id; ?>">
                             <div class="side-panel-row">
-                                <button type="button" class="cm-btn large light-blue-4 up-case btn-apply-job">Apply</button>
-                                <?php echo CHtml::button('Back', array('submit' => array('Site/Index'),'class'=>'cm-btn large text-uppercase light-blue right')) ?>
+                                <button type="button" class="cm-btn large light-blue-4 up-case btn-apply-job ">Apply</button>
+                                <?php echo CHtml::button('Back', array('submit' => array('Site/Index'),'class'=>'cm-btn large text-uppercase light-blue')) ?>
                             </div>
                         </div>
                     </div>

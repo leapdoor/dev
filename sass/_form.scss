@@ -1,6 +1,5 @@
 //@import "variable";
 
-
 $black: #000;
 $white: #fff;
 $form-input-line-color: #fbab18;
@@ -54,7 +53,6 @@ $animation-none: all 0 cubic-bezier(.64, .1, .27, 1.44);
   float: left;
   width: 100%;
   position: relative;
-  margin-bottom: 15px;
 
   textarea,
   input[type="text"],
@@ -68,6 +66,10 @@ $animation-none: all 0 cubic-bezier(.64, .1, .27, 1.44);
     line-height: 14px;
     width: 100%;
     margin-top: 16px;
+  }
+
+  &.with-gap {
+    //margin-bottom:30px;
   }
 
   &.not-title {
@@ -282,6 +284,11 @@ input[type="checkbox"] {
   margin-top: 20px;
 }
 
+.checkbox-wrapper,
+.radio-wrapper,
+.input-wrapper {
+  margin-bottom: 20px;
+}
 
 
 

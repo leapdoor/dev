@@ -107,15 +107,23 @@ function loadJobsByCategory() {
     Popup.hide();
 }
 
+var searchDivHeight = $('.full-height').innerHeight();
+
+setPageHeight();
+
+function setPageHeight() {
+    var pageHeight = responsivePageHeight();
+    $('.full-height').css('padding-bottom', (pageHeight - searchDivHeight) + 'px');
+}
+
+
 function responsivePageHeight() {
-    var pageHeight = $(window)[0].innerHeight;
-    $('.full-height').css('height', pageHeight + 'px');
-    return pageHeight;
+    return $(window)[0].innerHeight;
 }
 
 (function () {
 
-    $('.navbar').removeClass('light-blue').css('backgroundColor', 'transparent');
+    //$('.navbar').removeClass('light-blue').css('backgroundColor', 'transparent');
 })();
 
 
@@ -133,7 +141,10 @@ function calSize() {
 function scrollToDown() {
 
     var _titleTopSpace = $titleOffset + 90,
+        $searchSection = $('.search-section'),
         $searchArea = $('.search-area');
+
+    var $pageHeight = responsivePageHeight();
 
     if ($(window).scrollTop() > 0) {
         $("html, body").animate({scrollTop: _titleTopSpace}, 500);
@@ -188,6 +199,8 @@ function scrollToDown() {
                 $searchWrapper.addClass('is-fixed-search');
                 $searchWrapper.css({'top': topVal + 'px'});
             }
+            $searchSection.css('padding-bottom', '30px');
+
         } else {
 
             //when call at scroll up
@@ -208,12 +221,17 @@ function scrollToDown() {
 
             if ($_scroll === 0) {
                 $searchArea.siblings('.filters').css('opacity', '0');
+                $searchSection.css('padding-bottom', ($pageHeight - searchDivHeight) + 'px');
             }
         }
     });
 
     $searchInput.on('focus click', function () {
         scrollOnFocusInput();
+    });
+
+    $searchInput.on('keyup', function () {
+       //$(this).trigger('click');
     });
 
     init();

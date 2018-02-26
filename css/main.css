@@ -152,8 +152,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, label {
 .input-wrapper {
   float: left;
   width: 100%;
-  position: relative;
-  margin-bottom: 15px; }
+  position: relative; }
   .input-wrapper textarea,
   .input-wrapper input[type="text"],
   .input-wrapper input[type="password"],
@@ -358,6 +357,11 @@ input[type="checkbox"] {
   width: 100%;
   margin-top: 20px; }
 
+.checkbox-wrapper,
+.radio-wrapper,
+.input-wrapper {
+  margin-bottom: 20px; }
+
 .main-block {
   float: left;
   width: 100%; }
@@ -369,6 +373,9 @@ input[type="checkbox"] {
   -webkit-transition: all 0.5s cubic-bezier(0.01, 0.87, 0.29, 0.97);
   transition: all 0.5s cubic-bezier(0.01, 0.87, 0.29, 0.97);
   opacity: 1; }
+  @media (max-width: 767px) {
+    .main-title {
+      margin-top: calc(50%); } }
   .main-title h1 {
     color: rgba(0, 0, 0, 0.86);
     text-align: center;
@@ -469,6 +476,12 @@ input[type="checkbox"] {
 .yellow-script {
   padding: 60px 0;
   background: #ffca28; }
+
+.search-section {
+  -moz-transition: all, ease-in, 0.3s;
+  -o-transition: all, ease-in, 0.3s;
+  -webkit-transition: all, ease-in, 0.3s;
+  transition: all, ease-in, 0.3s; }
 
 .m-auto {
   margin: 0 auto; }
@@ -2243,6 +2256,7 @@ input.cm-btn,
 button.cm-btn,
 a.cm-btn {
   color: #fff;
+  vertical-align: middle;
   padding: 7px 20px;
   font-size: 14px;
   -webkit-border-radius: 2px;
@@ -2254,6 +2268,13 @@ a.cm-btn {
   margin-left: 0;
   background: #bfbfc5;
   text-transform: uppercase; }
+  @media (max-width: 767px) {
+    input.cm-btn,
+    button.cm-btn,
+    a.cm-btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 3px; } }
   input.cm-btn.right,
   button.cm-btn.right,
   a.cm-btn.right {
@@ -2741,6 +2762,10 @@ header {
     vertical-align: middle; }
     .navbar .navbar-header a img {
       width: auto; }
+      @media (max-width: 767px) {
+        .navbar .navbar-header a img {
+          width: 60px;
+          margin: 15px; } }
   .navbar .navbar-header .mobile-menu {
     width: 30px;
     height: 30px;
@@ -2767,7 +2792,7 @@ header {
   z-index: 998; }
 
 .navbar-nav {
-  padding: 12px 15px; }
+  padding: 16px 15px; }
   @media (max-width: 767px) {
     .navbar-nav {
       background: #fbab18;
@@ -2932,6 +2957,9 @@ header {
     display: inline-block;
     width: 100%;
     font-weight: 300; }
+    @media (max-width: 767px) {
+      .job-list-wrap .job-list > li a h6 {
+        text-align: left; } }
   .job-list-wrap .job-list > li a span {
     vertical-align: middle; }
     .job-list-wrap .job-list > li a span.time-left {
