@@ -32,7 +32,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
                             <div class="list"></div>
                         </div>
                         <div class="col-md-8 col-xs-12 col-sm-6 job-input">
-                            <input id="searchText" name="searchText" type="text"
+                            <input id="searchText" autocomplete="off" name="searchText" type="text"
                                    placeholder="Type Job Title, Keyword or Company Name">
                         </div>
                     </div>
@@ -110,6 +110,7 @@ Search Result Section
 
     $('#searchText').keyup(function () {
         loadAdvertisementData("1-1");
+
     });
 
     var loaderHtml = "<div class='absolute' id='loadingmessage'><img src='<?php echo Yii::app()->baseUrl; ?>/images/system/loader/frontLoader.gif'/></div>";
@@ -135,6 +136,7 @@ Search Result Section
             },
             success: function (responce) {
                 $("#ajaxLoadAdvertisements").html(responce);
+                scrollFun();
                 // scrollToDown()
             }
         });

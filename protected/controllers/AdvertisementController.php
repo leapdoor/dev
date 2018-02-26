@@ -22,7 +22,7 @@ class AdvertisementController extends Controller {
         $page = explode('-', Yii::app()->request->getPost('page'))[0];
         $adId = array_key_exists(1,  explode('-', Yii::app()->request->getPost('page'))) ? explode('-', Yii::app()->request->getPost('page'))[1] : 1  ;
 
-        $limit = 10;
+        $limit = 20;
         $data = Controller::createSearchCriteriaForAdvertisement($sql, '', $page, $limit, 'ad.ad_published_time');
 
         $result = $data['result'];
